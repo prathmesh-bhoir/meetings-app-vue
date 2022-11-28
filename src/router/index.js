@@ -2,15 +2,11 @@ import Router from 'vue-router';
 import CalendarPage from '@/components/pages/CalendarPage';
 import LoginPage from '@/components/pages/LoginPage';
 import SignupPage from '@/components/pages/SignupPage';
+import MeetingsPage from '@/components/pages/MeetingsPage';
 
 const router = new Router({
     mode: 'history',
     routes: [
-        {
-            name: 'calendar',
-            path: '/calendar',
-            component: CalendarPage
-        },
         {
             name: 'login',
             path: '/login',
@@ -21,6 +17,15 @@ const router = new Router({
             path: '/',
             component: SignupPage,
         },
+        {
+            name: 'calendar',
+            path: '/calendar',
+            component: CalendarPage
+        },{
+            name: 'meetings',
+            path: '/meetings',
+            component: MeetingsPage
+        }
     ]
 })
 

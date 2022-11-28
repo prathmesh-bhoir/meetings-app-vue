@@ -3,7 +3,7 @@ import Vuex from 'vuex'
 import Router from 'vue-router';
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 // import VueToast from 'vue-toast-notification';
-// import Vuelidate from 'vuelidate';
+import Vuelidate from 'vuelidate';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 // import { library } from '@fortawesome/fontawesome-svg-core';
 
@@ -27,7 +27,7 @@ Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)
 Vue.use(Vuex)
 Vue.use(Router)
-// Vue.use(Vuelidate);
+Vue.use(Vuelidate);
 // Vue.use(VueToast);
 
 /* add icons to the library */

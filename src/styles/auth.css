@@ -1,0 +1,46 @@
+body, html{
+    background-color: #f1f2f3;
+}
+
+.login-section,
+.signup-section{
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}
+
+.login-form,
+.signup-form{
+    min-width: 20%;
+    background-color: #fff;
+    padding: 1.5em;
+    border-radius: 10px;
+    box-shadow: 0 10px 25px rgb(0 0 0 / 5%),
+        0 20px 48px rgb(0 0 0 / 5%),
+        0 1px 4px rgb(0 0 0 / 10%);
+    margin-bottom: 0.5em;
+}
+
+label{
+    font-size: 1.25rem;
+}
+
+input{
+    display: block;
+    margin: 1em 0 1em 0;
+    padding: 0.5em;
+    border: 1px solid grey;
+    border-radius: 5px;
+    width: calc(100% - 1.5em);
+}
+
+.login-btn,
+.signup-btn{
+    width: 100%;
+    font-size: 1.25em;
+    margin: 0;
+    margin-top: 0.5em;
+}

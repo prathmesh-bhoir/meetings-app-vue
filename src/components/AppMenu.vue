@@ -1,26 +1,43 @@
 <template>
-  <div class="main-menu">
-    <div class="main-menu-nav my-container">
-      <div class="mobile-display d-lg-none">
-          <a class="bolder menu-header" href="/">Meetings App</a>
-          <button type="button" class="fa-solid fa-bars main-menu-toggler"></button>
+  <div class="my-menu">
+    <div class="nav-menu d-flex justify-content-between align-items-center container">
+      <div class="mobile-menu d-flex justify-content-between align-items-center">
+        <h1 class="logo">Meetings app</h1>
+        <div class="bars" @click="showMenu()">
+          <font-awesome-icon 
+          icon="bars" 
+          />
+        </div>
       </div>
-      <div class="list-unstyled">           
-        <li class="main-menu-link"><a href="index.html" class="active">Calendar</a></li>
-        <li class="main-menu-link"><a href="meetings-add.html">Meetings</a></li>
-        <li class="main-menu-link"><a href="teams.html">Teams</a></li>
+      <div
+      class="nav-content d-flex align-items-center"
+      :class="this.showMobileMenu ? 'open-menu' : 'closed-menu'"
+      >
+          <li>Menu</li>
+          <li>About</li>
+          <li>Contact</li>
       </div>
-      <div class="main-menu-link container side-nav">
-        <p class="main-menu-link">Hello, <span id="userEmail" class="no-underline">Friend</span></p>
-        <p class="main-menu-link logout-btn"><a id="logout-btn" href="login.html">Login</a></p>
+      <div class="d-flex justify-content-end" :class="this.showMobileMenu ? 'open-menu' : 'closed-menu'">
+        <div class="email-field">Hello, </div>
+        <div class="">Login</div>
       </div>
-    </div>   
   </div>
+</div>
 </template>
 
 <script>
     export default {
         name: 'AppMenu',
+        data(){
+          return {
+            showMobileMenu: false
+          }
+        },
+        methods: {
+          showMenu(){
+            this.showMobileMenu = !this.showMobileMenu;
+          }
+        }
     }
 </script>
 

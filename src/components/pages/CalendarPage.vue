@@ -11,15 +11,15 @@
                 </div>
                 <div class="right-side">
                     <input type="date" name="date" id="date-picker">
-                    <i class="fa-regular fa-calendar" style="color:black;"></i>
+                    <!-- <i class="fa-regular fa-calendar" style="color:black;"></i> -->
                 </div>
             </section>
             <section class="calendar">
                 <div class="calendar-hours">
-                    <div class="calendar-hour">0</div>
+                    <div class="calendar-hour" v-for="n in 24" :key="(n-1)">{{(n-1)}}</div>
                 </div>
                 <div class="calendar-content">
-                    <div class="calendar-content-box"></div>
+                    <div class="calendar-content-box" v-for="n in 24" :key="(n-1)"></div>
                 </div>
             </section>
         </div>  
@@ -43,6 +43,7 @@ export default {
     display: flex;
     justify-content: space-between;
     position: relative;
+    margin-bottom: 0.5em;
 }
 
 .left-side .date{
@@ -50,13 +51,13 @@ export default {
 }
 
 .right-side{
-    display: flex;
+    /* display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-between; */
     /* border: 1px solid grey;
     border-radius: 4px; */
     width: 30%;
-    height: 40px;
+    height: auto;
     position: absolute;
     top: 30%;
     right: 0%;
@@ -66,13 +67,14 @@ export default {
 #date-picker{
     width: 100%;
     padding: 0.5em;
+    margin-top: 0;
 }
 
-.right-side i{
-    position: absolute;
+/* .right-side i{
+    position: relative;
     left: 90%;
     margin: 0 5px;
-}
+} */
 
 .calendar{
     display: flex;

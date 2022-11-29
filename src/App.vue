@@ -16,9 +16,14 @@ export default {
 
 
 <style>
+@import './styles/external/normalize.css';
+
+body{
+  background-color: #fff !important;
+}
 
 hr{
-    background-color: lightgrey;
+    background-color: grey;
     height:1px;
     border:0;
 }

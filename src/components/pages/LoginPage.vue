@@ -57,7 +57,6 @@
 
 <script>
 import Vue from 'vue';
-import { login } from '@/services/auth';
 import { required , email, minLength } from 'vuelidate/lib/validators';
 
 export default {
@@ -103,11 +102,12 @@ export default {
             }
         
         try {
-          const data = await login(this.form);
+          const email = await this.$store.dispatch('login', this.form);
+          alert("User logged in successfully!");
           this.$router.push({
               name: 'calendar'
           });
-          console.log(data)         
+          return email
         } catch (error) {
           Vue.$toast.open({
             type: 'error',
@@ -121,6 +121,6 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 @import '../../styles/auth.css';
 </style>

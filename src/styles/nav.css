@@ -1,11 +1,5 @@
-.main-menu{
-    background-color: #F8F9FA;
-}
-
-.main-menu-nav{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.my-menu{
+    background-color: lightgrey;
 }
 
 .main-menu-nav .main-menu-link a{
@@ -47,16 +41,16 @@
 
 
 .mobile-display{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     font-size: 1.5em;
     width: 100%;
 }
-.menu-header{
-    text-decoration: none;
-    margin-right: 1em;
-    color: black;
+
+.open-menu{
+    opacity: 1;
+}
+
+.closed-menu{
+    opacity: 0;
 }
 
 @media (max-width: 992px) {

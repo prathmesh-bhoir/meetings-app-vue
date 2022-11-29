@@ -5,10 +5,10 @@ import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 import VueToast from 'vue-toast-notification';
 import Vuelidate from 'vuelidate';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-// import { library } from '@fortawesome/fontawesome-svg-core';
+import { library } from '@fortawesome/fontawesome-svg-core';
 
 // import any icons that you use in the app
-// import { faCheck, faXmark, faCaretUp, faCaretDown } from '@fortawesome/free-solid-svg-icons'
+import { fas, faBars } from '@fortawesome/free-solid-svg-icons'
 
 // import formatDate from '@/filters/formatDate';
 
@@ -16,6 +16,8 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 // Import Bootstrap and BootstrapVue CSS files (order is important)
 // we can import even CSS files!
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 import 'vue-toast-notification/dist/theme-default.css'
 
@@ -30,7 +32,7 @@ Vue.use(Vuelidate);
 Vue.use(VueToast);
 
 /* add icons to the library */
-// library.add(faCheck, faXmark, faCaretUp, faCaretDown)
+library.add(fas, faBars)
 
 /* use Vue.component( componentName, ComponentObject ) to globally register the component - once you globally register a component you don't need to locally register in each and every component */
 /* add font awesome icon component */

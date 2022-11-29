@@ -9,6 +9,7 @@
           type="text"
           v-model="form.name"
           placeholder="enter username"
+          @blur="$v.form.name.$touch()"
         ></b-form-input>
       </b-form-group>
       <div v-if="$v.form.name.$error">
@@ -16,7 +17,7 @@
             <small>This field is required</small>
           </div>
           <div class="text-danger" v-if="!$v.form.email.maxLength">
-            <small>The name should contain more than 35 characters</small>
+            <small>The name should not contain more than 35 characters</small>
           </div>
         </div>
 
@@ -26,6 +27,7 @@
           type="email"
           v-model="form.email"
           placeholder="enter email"
+          @blur="$v.form.email.$touch()"
         ></b-form-input>
       </b-form-group>
       <div v-if="$v.form.email.$error">
@@ -43,6 +45,7 @@
           type="password"
           v-model="form.password"
           placeholder="password"
+          @blur="$v.form.password.$touch()"
         ></b-form-input>
       </b-form-group>
       <div v-if="$v.form.password.$error">
@@ -72,6 +75,7 @@
           type="password"
           v-model="form.confirmPassword"
           placeholder="confirm password"
+          @blur="$v.form.confirmPassword.$touch()"
         ></b-form-input>
       </b-form-group>
       <div v-if="$v.form.confirmPassword.$error">
@@ -93,8 +97,8 @@ import { required , email, minLength, maxLength } from 'vuelidate/lib/validators
 
 export default {
     name: 'SignupPage',
-    data(){
-        return{
+    data() {
+        return {
             form: {
                 name: '',
                 email: '',
@@ -130,7 +134,7 @@ export default {
           } 
         },
         confirmPassword: {
-          required,
+          required
         }
       }
     },
@@ -175,6 +179,6 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 @import '../../styles/auth.css';
 </style>

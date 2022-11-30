@@ -23,9 +23,10 @@ body{
 }
 
 hr{
-    background-color: grey;
+    background-color: rgb(170, 170, 170);
     height:1px;
     border:0;
+    opacity: 1;
 }
 
 .my-container{

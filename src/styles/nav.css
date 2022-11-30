@@ -39,6 +39,9 @@
         justify-content: flex-start;
         width: 100%;
     }
+    .logout-btn{
+        width: 20px;
+    }
     .mobile-menu{
         display: block !important;
         width: 100%;

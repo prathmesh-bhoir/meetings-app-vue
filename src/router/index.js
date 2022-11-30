@@ -3,6 +3,8 @@ import CalendarPage from '@/components/pages/CalendarPage';
 import LoginPage from '@/components/pages/LoginPage';
 import SignupPage from '@/components/pages/SignupPage';
 import MeetingsPage from '@/components/pages/MeetingsPage';
+import FilterMeetings from '@/components/FilterMeetings';
+import AddMeeting from '@/components/AddMeeting';
 
 const router = new Router({
     mode: 'history',
@@ -24,7 +26,19 @@ const router = new Router({
         },{
             name: 'meetings',
             path: '/meetings',
-            component: MeetingsPage
+            component: MeetingsPage,
+            children: [
+                {
+                    name: 'filter-meetings',
+                    path: '',
+                    component: FilterMeetings
+                },
+                {
+                    name: 'add-meeting',
+                    path: 'add',
+                    component: AddMeeting
+                }
+            ]
         }
     ]
 })

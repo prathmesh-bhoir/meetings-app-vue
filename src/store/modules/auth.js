@@ -10,8 +10,8 @@ const auth = {
             email: localStorage.getItem( KEY_EMAIL ) || '',
             name: localStorage.getItem( KEY_NAME ) || ''
         },
-        gettters: {
-
+        getters: {
+            userEmail: (state) => state.email,
         },
         mutations: {
             setToken(state, token){

@@ -1,25 +1,27 @@
 <template>
   <div class="my-menu">
-    <div class="nav-menu d-flex justify-content-between align-items-center container">
-      <div class="mobile-menu d-flex justify-content-between align-items-center">
-        <h1 class="logo">Meetings app</h1>
-        <div class="bars" @click="showMenu()">
-          <font-awesome-icon 
-          icon="bars" 
-          />
+    <div class="nav-menu d-flex justify-content-between align-items-center my-container">
+      <div class="mobile-menu">
+        <div class="d-flex justify-content-between align-items-center ">
+          <h1 class="logo">Meetings app</h1>
+          <div class="bars" @click="showMenu()">
+            <font-awesome-icon 
+            icon="bars" 
+            />
+          </div>
         </div>
       </div>
       <div
-      class="nav-content d-flex align-items-center"
+      class="nav-content d-flex"
       :class="this.showMobileMenu ? 'open-menu' : 'closed-menu'"
       >
-          <li>Menu</li>
-          <li>About</li>
-          <li>Contact</li>
+          <router-link :to="{name: 'calendar' }" class="main-menu-link" class-active="active">Calendar</router-link>
+          <router-link :to="{name: 'meetings'}" class="main-menu-link" class-active="active">Meetings</router-link>
+          <router-link :to="{name: 'teams' }" class="main-menu-link" class-active="active">Teams</router-link>
       </div>
-      <div class="d-flex justify-content-end" :class="this.showMobileMenu ? 'open-menu' : 'closed-menu'">
+      <div class="nav-content-right d-flex justify-content-end" :class="this.showMobileMenu ? 'open-menu' : 'closed-menu'">
         <div class="email-field">Hello, </div>
-        <div class="">Login</div>
+        <div class="logout-btn" @click.prevent="logOut()">Logout</div>
       </div>
   </div>
 </div>
@@ -30,12 +32,16 @@
         name: 'AppMenu',
         data(){
           return {
-            showMobileMenu: false
+            showMobileMenu: true,
           }
         },
         methods: {
           showMenu(){
             this.showMobileMenu = !this.showMobileMenu;
+          },
+          logOut(){
+            localStorage.clear();
+            this.$router.replace({name: 'login'});
           }
         }
     }

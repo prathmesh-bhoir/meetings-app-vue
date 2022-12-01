@@ -32,6 +32,7 @@ export default {
 <style scoped>
 
 .options-container{
+    margin-top: 1.5em;
     padding-top: 0.25em;
 }
 .page-options{
@@ -45,7 +46,7 @@ hr{
 
 .router-link-exact-active{
     color: black;
-    border: 1px solid rgb(170, 170, 170);
+    border: 1px solid rgb(180, 180, 180);
     border-bottom: none;
     border-radius: 4px;
     background-color: white;

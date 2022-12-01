@@ -23,8 +23,9 @@ body{
 }
 
 hr{
-    background-color: rgb(170, 170, 170);
+    background-color: rgb(180, 180, 180);
     height:1px;
+    color: transparent;
     border:0;
     opacity: 1;
 }
@@ -40,7 +41,7 @@ hr{
     margin: 1.2em 0;
     border: none;
     border-radius: 4px;
-    padding: 0.4em;
+    padding: 0.5em;
     transition: 1s;
 }
 .my-btn-red{

@@ -5,6 +5,8 @@ import SignupPage from '@/components/pages/SignupPage';
 import MeetingsPage from '@/components/pages/MeetingsPage';
 import FilterMeetings from '@/components/FilterMeetings';
 import AddMeeting from '@/components/AddMeeting';
+import TeamsPage from '@/components/pages/TeamsPage';
+import AddTeam from '@/components/AddTeam';
 
 const router = new Router({
     mode: 'history',
@@ -37,6 +39,17 @@ const router = new Router({
                     name: 'add-meeting',
                     path: 'add',
                     component: AddMeeting
+                }
+            ]
+        },{
+            name: 'teams',
+            path: '/teams',
+            component: TeamsPage,
+            children: [
+                {
+                    name: 'add-team',
+                    path: 'add',
+                    component: AddTeam
                 }
             ]
         }

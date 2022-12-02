@@ -16,7 +16,7 @@
       :class="this.showMobileMenu ? 'open-menu' : 'closed-menu'"
       >
           <router-link :to="{name: 'calendar' }" class="main-menu-link" class-active="active">Calendar</router-link>
-          <router-link :to="{name: 'filter-meetings'}" class="main-menu-link" class-active="active">Meetings</router-link>
+          <router-link :to="{name: 'filter-meetings'}" class="main-menu-link" :class="this.meetingsPath ? 'current' : '' " class-active="active">Meetings</router-link>
           <router-link :to="{name: 'teams' }" class="main-menu-link" class-active="active">Teams</router-link>
       </div>
       <div class="nav-content-right d-flex justify-content-end" :class="this.showMobileMenu ? 'open-menu' : 'closed-menu'">
@@ -33,6 +33,7 @@
         data(){
           return {
             showMobileMenu: true,
+            meetingsPath: false
           }
         },
         created() {
@@ -42,11 +43,29 @@
         computed: {
           getEmail() {
             return this.$store.getters.userEmail;
+          },
+          isMeetingPath(){
+            if (this.$route.path == '/meetings/add'){
+              return true
+            }
+            return false
+          }
+        },
+        watch: {
+          isMeetingPath() {
+              this.updateMeetingsPath()
           }
         },
         methods: {
           showMenu(){
             this.showMobileMenu = !this.showMobileMenu;
+          },
+          updateMeetingsPath(){
+            if(this.$route.path == '/meetings/add'){
+              this.meetingsPath = true
+            }else{
+              this.meetingsPath = false
+            }
           },
           checkScreen(){
             if(window.innerWidth >= 992){
@@ -77,7 +96,8 @@
 }
 .main-menu-link:hover,
 .main-menu-link:active,
-.router-link-exact-active{
+.router-link-exact-active,
+.current{
     cursor: pointer;
     color: black !important;
     background-color: lightgrey;

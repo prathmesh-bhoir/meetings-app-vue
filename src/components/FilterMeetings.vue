@@ -5,7 +5,11 @@
       <hr />
       <form id="filter-meeting-form" class="meetings-form mt-3">
         <label for="search-date"> Date: </label>
-        <select name="search-date" id="search-date" class="wdth">
+        <select 
+        name="search-date" 
+        id="search-date"
+        v-model="period" 
+        class="wdth">
           <option value="all" selected>ALL</option>
           <option value="past">PAST</option>
           <option value="present">PRESENT</option>
@@ -17,10 +21,11 @@
           name="search-description"
           class="wdth"
           id="search-description"
+          v-model.trim="search"
           rows="3"
           placeholder="Search using the words which describes the meeting"
         ></textarea>
-        <button type="submit" class="my-btn">Search</button>
+        <button type="submit" @click.prevent="onFilterMeetings()" class="my-btn">Search</button>
       </form>
     </div>
     <div class="meeting-results-section">
@@ -31,8 +36,23 @@
 </template>
 
 <script>
+import { filterMeetings } from '@/services/meetings'
+
 export default {
   name: "FilterMeetings",
+  data(){
+    return{
+      period: '',
+      search: '',
+      filteredMeetings: ''
+    }
+  },
+  methods: {
+    async onFilterMeetings(){
+      this.filteredMeetings = await filterMeetings(this.period, this.search)
+      console.log(this.filteredMeetings)
+    }
+  }
 };
 </script>
 

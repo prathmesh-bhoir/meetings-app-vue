@@ -10,7 +10,7 @@
         id="search-date"
         v-model="period" 
         class="wdth">
-          <option value="all" selected>ALL</option>
+          <option value="all" selected>{{period.toLocaleUpperCase()}}</option>
           <option value="past">PAST</option>
           <option value="present">PRESENT</option>
           <option value="future">FUTURE</option>
@@ -31,26 +31,74 @@
     <div class="meeting-results-section">
         <h1>Meetings matching search criteria</h1>
         <hr>
+        <div class="meeting-results" v-for="meeting in filteredMeetings" :key="meeting._id">
+          <div class="result">
+            <h2 class="meet-name">{{meeting.name}}</h2>
+            <p>
+              <span class="bolder" style="font-size: 1.25em;">{{meeting.date.slice(0,10)}} </span>
+              <span>
+                {{meeting.startTime.hours}}:{{meeting.startTime.minutes}} - {{meeting.endTime.hours}}:{{meeting.endTime.minutes}}
+              </span>
+            </p>
+            <p>{{meeting.desc}}</p>
+            <button type="button" id="excuse-btn" class="excuse-btn my-btn-red" @click="onExcuse(meeting._id)">Excuse yourself</button>
+            <hr>
+            <p class="attendees"><span class="bolder">Attendees</span>: 
+              <span v-for="attendee in meeting.attendees" :key="attendee.userId">{{attendee.email}}, </span></p>
+            <label for="members">
+              <select name="members" id="members" class="select-members">
+                <option value="">Select member</option>
+                <!-- ${setMembers()} -->
+              </select>
+            </label>
+            <button type="button" id="add-member-btn" class="my-btn">Add</button>
+          </div>
+        </div>
     </div>
   </div>
 </template>
 
 <script>
-import { filterMeetings } from '@/services/meetings'
+import Vue from 'vue';
+import { filterMeetings, excuseMeet } from '@/services/meetings'
 
 export default {
   name: "FilterMeetings",
   data(){
     return{
-      period: '',
+      period: 'all',
       search: '',
       filteredMeetings: ''
     }
   },
   methods: {
     async onFilterMeetings(){
-      this.filteredMeetings = await filterMeetings(this.period, this.search)
-      console.log(this.filteredMeetings)
+      try {
+        this.filteredMeetings = await filterMeetings(this.period, this.search)
+      } catch (error) {
+        Vue.$toast.open({
+            type: 'error',
+            message: error.response.data,
+            duration: 5000
+          })
+      }
+    },
+    async onExcuse(id){
+      try {
+        await excuseMeet(id);
+        this.onFilterMeetings() 
+        Vue.$toast.open({
+            type: 'success',
+            message: 'meetings updated',
+            duration: 5000
+          })     
+      } catch (error) {
+        Vue.$toast.open({
+            type: 'error',
+            message: error.response.data,
+            duration: 5000
+          })
+      }
     }
   }
 };
@@ -65,7 +113,7 @@ export default {
   width:100%;
 }
 .result{
-    border: 1px solid lightgrey;
+    border: 1px solid grey;
     padding: 0 1em;
     margin-top: 1em;
 }

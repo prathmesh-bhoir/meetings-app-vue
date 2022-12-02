@@ -7,3 +7,9 @@ export const filterMeetings = async (period, search) => {
 
     return response.data
 }
+
+export const excuseMeet = async (id) => {
+    const response = await axios.patch(`${BASE_URL}/meetings/${id}?action=remove_attendee`);
+
+    return response.data
+}

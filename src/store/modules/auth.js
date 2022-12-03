@@ -1,17 +1,21 @@
 import { login } from "@/services/auth";
+import getUsers from "@/services/utils/getUsers";
 
 const KEY_NAME = 'name'
 const KEY_EMAIL = 'email'
 const KEY_TOKEN = 'token'
+const KEY_USERS = 'users'
 
 const auth = {
         state: {
             token: localStorage.getItem( KEY_TOKEN ) || '',
             email: localStorage.getItem( KEY_EMAIL ) || '',
-            name: localStorage.getItem( KEY_NAME ) || ''
+            name: localStorage.getItem( KEY_NAME ) || '',
+            allUsers: localStorage.getItem(KEY_USERS) || ''
         },
         getters: {
             userEmail: (state) => state.email,
+            allUsers: (state) => state.allUsers
         },
         mutations: {
             setToken(state, token){
@@ -22,6 +26,9 @@ const auth = {
             },
             setName(state, name){
                 state.name = name
+            },
+            setAllUsers(state, allUsers){
+                state.allUsers = allUsers
             }
         },
         actions: {
@@ -39,6 +46,20 @@ const auth = {
                 commit('setName', name);
 
                 return email;
+            },
+            async getAllUsers({commit}){
+                
+                const usersList = []
+                const data = await getUsers();
+                data.forEach(user => {
+                    usersList.push(user.email)
+                })
+
+                localStorage.setItem(KEY_USERS, usersList);
+
+                commit('setAllUsers', usersList);
+
+                return data;
             }
         }
 }

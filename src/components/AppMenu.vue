@@ -39,6 +39,7 @@
         created() {
           window.addEventListener('resize', this.checkScreen);
           this.checkScreen();
+          window.addEventListener('beforeunload', this.updateMeetingsPath())
         },
         computed: {
           getEmail() {

@@ -48,7 +48,6 @@
             <label for="members">
               <select name="members" id="members" class="select-members">
                 <option value="">Select member</option>
-                <!-- ${setMembers()} -->
               </select>
             </label>
             <button type="button" id="add-member-btn" class="my-btn">Add</button>

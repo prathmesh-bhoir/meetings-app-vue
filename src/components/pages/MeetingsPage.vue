@@ -29,8 +29,8 @@ export default {
 
 
 
-<style scoped>
 
+<style scoped>
 .options-container{
     margin-top: 1.5em;
     padding-top: 0.25em;

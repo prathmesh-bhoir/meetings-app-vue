@@ -65,6 +65,9 @@ textarea{
   padding: 0.5em;
   margin-right: 0.5em;
 }
+.select-members option{
+  color: grey;
+}
 .add-member-btn{
   margin-top: 5px;
 }

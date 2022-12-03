@@ -19,6 +19,7 @@
                         <label for="members"></label>
                         <select name="members" id="members" class="select-members">
                           <option value="">Select member</option>
+                          <option v-for="(user, index) in usersList" :key="index">{{user}}</option>
                         </select>
                         <button type="submit" class="my-btn add-member-btn">Add</button>
                       </form>
@@ -42,21 +43,33 @@
 <script>
 import AppMenu from '@/components/AppMenu.vue';
 import { filterTeams } from '@/services/teams';
+import { mapGetters } from 'vuex';
 
 export default {
     name: 'TeamsPage',
     data(){
       return {
-        teams: ''
+        teams: '',
+        usersList: []
       }
     },
     components: {
         AppMenu
     },
+    mounted() {
+        this.usersList = this.allUsers;
+    },
     created() {
+      window.addEventListener('beforeunload', this.updateUsersList())
       this.getTeams()
     },
+    computed: {
+      ...mapGetters(['allUsers']),
+    },
     methods: {
+      async updateUsersList(){
+        await this.$store.dispatch('getAllUsers')
+      },
       async getTeams(){
         this.teams = await filterTeams();
         console.log(this.teams)
@@ -117,6 +130,9 @@ body{
   font-size: medium;
   padding: 0.5em;
   margin-right: 0.5em;
+}
+.select-members option{
+  color: grey;
 }
 
 .desc,

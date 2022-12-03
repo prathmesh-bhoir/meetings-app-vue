@@ -12,7 +12,7 @@
                       <h3 class="team-heading">{{team.name}}</h3>
                       <p class="bolder">{{team.shortName}}</p>
                       <p class="desc">{{team.description}}</p>
-                    <button class="excuse-btn my-btn-red">Excuse yourself</button>
+                    <button class="excuse-btn my-btn-red" @click.prevent="onExcuse(team._id)">Excuse yourself</button>
                     <hr>
                     <p class="members"><span class="bolder">Members:</span> <span class="team-members" v-for="member in team.members" :key="member.userId">{{member.email}}, </span></p>
                       <form class="members-form d-flex align-items-end h-100">
@@ -41,8 +41,9 @@
 </template>
 
 <script>
+import Vue from 'vue';
 import AppMenu from '@/components/AppMenu.vue';
-import { filterTeams } from '@/services/teams';
+import { filterTeams, excuseTeam } from '@/services/teams';
 import { mapGetters } from 'vuex';
 
 export default {
@@ -73,6 +74,23 @@ export default {
       async getTeams(){
         this.teams = await filterTeams();
         console.log(this.teams)
+      },
+      async onExcuse(teamId){
+        try {
+          await excuseTeam(teamId)
+          await this.getTeams()
+          Vue.$toast.open({
+            type: 'success',
+            message: 'Teams Updated!',
+            duration: 5000
+          })
+        } catch (error) {
+          Vue.$toast.open({
+            type: 'error',
+            message: error.response.data,
+            duration: 5000
+          })
+        }
       }
     }
 }

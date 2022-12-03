@@ -8,3 +8,8 @@ export const filterTeams = async () => {
     return response.data
 }
 
+export const excuseTeam = async (teamId) => {
+    const response = await axios.patch(`${BASE_URL}/teams/${teamId}?action=remove_member`)
+
+    return response.data
+}

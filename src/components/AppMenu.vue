@@ -44,15 +44,12 @@
           getEmail() {
             return this.$store.getters.userEmail;
           },
-          isMeetingPath(){
-            if (this.$route.path == '/meetings/add'){
-              return true
-            }
-            return false
+          checkPath(){
+            return this.$route.path
           }
         },
         watch: {
-          isMeetingPath() {
+          checkPath() {
               this.updateMeetingsPath()
           }
         },

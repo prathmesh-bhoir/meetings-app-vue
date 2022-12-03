@@ -7,3 +7,4 @@ export const filterTeams = async () => {
 
     return response.data
 }
+

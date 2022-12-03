@@ -130,7 +130,8 @@ export default {
                 endHr: '',
                 endMin: 0,
                 endTime: {},
-                attendees: ''
+                attendees: '',
+                addMeet: true
             }
         }
     },
@@ -171,20 +172,37 @@ export default {
 
             this.form.startTime = this.getTime(this.form.startHr, this.form.startMin)
             this.form.endTime = this.getTime(this.form.endHr, this.form.endMin)
+
+            const emails = this.form.attendees.split(', ')
+
+            emails.forEach(element => {
+                element = element.trim()
+                if (!/^[A-Za-z0-9@_.-]*$/.test(element)) {
+                    alert("enter correct team or email id")
+                    this.addMeet = false
+                }else if (!/^[A-Za-z][A-Za-z0-9_.-]*@[a-z]*[.][a-z]*$/.test(element)) {
+                    alert("enter correct team or email id")
+                    this.addMeet = false
+                }else{
+                    this.addMeet = true
+                }
+            })
         
-            try {
-                await addMeeting(this.form)
-                Vue.$toast.open({
-                    type: 'success',
-                    message: 'New Meeting Added!',
-                    duration: 5000
-                })
-            } catch (error) {
-                Vue.$toast.open({
-                    type: 'error',
-                    message: error.response.data,
-                    duration: 5000
-                })
+            if(this.addMeet){
+                try {
+                    await addMeeting(this.form)
+                    Vue.$toast.open({
+                        type: 'success',
+                        message: 'New Meeting Added!',
+                        duration: 5000
+                    })
+                } catch (error) {
+                    Vue.$toast.open({
+                        type: 'error',
+                        message: error.response.data,
+                        duration: 5000
+                    })
+                }
             }
         }
     }

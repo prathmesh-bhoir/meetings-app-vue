@@ -24,6 +24,18 @@ export const addMeeting = async (meetDetails) => {
 
     const attendees = meetDetails.attendees.split(', ')
 
+    // attendees.forEach(element => {
+    //     element = element.trim()
+    //     if (!/^[A-Za-z0-9@_.-]*$/.test(element)) {
+    //         alert("enter correct team or email id")
+    //         return
+    //     }
+    //     if (!/^[A-Za-z][A-Za-z0-9_.-]*@[a-z]*[.][a-z]*$/.test(element)) {
+    //         alert("enter correct team or email id")
+    //         return
+    //     }
+    // })
+
     const details = {
         name: meetDetails.name,
         description: meetDetails.description,

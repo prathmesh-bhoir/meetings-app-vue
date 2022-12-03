@@ -9,19 +9,20 @@
             <section class="my-teams" id="teams-results">
               <div v-for="team in teams" :key="team._id" class="d-flex">
                 <div class="team d-flex flex-column">
-                    <h3 class="team-heading">{{team.name}}</h3>
-                    <p class="bolder">{{team.shortName}}</p>
-                    <p class="desc">{{team.description}}</p>
+                      <h3 class="team-heading">{{team.name}}</h3>
+                      <p class="bolder">{{team.shortName}}</p>
+                      <p class="desc">{{team.description}}</p>
                     <button class="excuse-btn my-btn-red">Excuse yourself</button>
                     <hr>
                     <p class="members"><span class="bolder">Members:</span> <span class="team-members" v-for="member in team.members" :key="member.userId">{{member.email}}, </span></p>
-                    <form class="members-form">
+                      <form class="members-form d-flex align-items-end h-100">
                         <label for="members"></label>
-                          <select name="members" id="members" class="select-members">
-                              <option value="">Select member</option>
-                          </select>
-                      <button type="submit" class="my-btn add-member-btn">Add</button>
-                    </form>
+                        <select name="members" id="members" class="select-members">
+                          <option value="">Select member</option>
+                        </select>
+                        <button type="submit" class="my-btn add-member-btn">Add</button>
+                      </form>
+
                 </div>
               </div>
                 <div class="team d-flex flex-column">
@@ -104,7 +105,8 @@ body{
 }
 
 .excuse-btn{
-  width: 40%;
+  margin-top: 0.5em;
+  width: 200px;
 }
 .select-members{
   width: 50%;
@@ -120,6 +122,7 @@ body{
 }
 
 .add-member-btn{
+  margin-bottom: 0;
   padding: 0.6em;
 }
 </style>

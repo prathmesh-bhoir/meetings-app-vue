@@ -48,7 +48,7 @@
             <form @submit.prevent="addUser(meeting._id, userId)">
               <label for="members">
                 <select name="members" id="members" class="select-members" v-model="userId" required>
-                  <option value="">Select member</option>
+                  <option value="" selected>Select member</option>
                   <option v-for="(user, index) in usersList" :key="index" :value="user">{{ user }}</option>
                 </select>
               </label>

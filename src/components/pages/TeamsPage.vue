@@ -15,9 +15,11 @@
                     <button class="excuse-btn my-btn-red" @click.prevent="onExcuse(team._id)">Excuse yourself</button>
                     <hr>
                     <p class="members"><span class="bolder">Members:</span> <span class="team-members" v-for="member in team.members" :key="member.userId">{{member.email}}, </span></p>
-                      <form class="members-form d-flex align-items-end h-100">
+                      <form class="members-form d-flex align-items-end h-100" @submit.prevent="onAddUser(team._id, userId)">
                         <label for="members"></label>
-                        <select name="members" id="members" class="select-members">
+                        <select name="members" id="members" class="select-members" 
+                        v-model="userId"
+                        required>
                           <option value="">Select member</option>
                           <option v-for="(user, index) in usersList" :key="index">{{user}}</option>
                         </select>
@@ -43,7 +45,7 @@
 <script>
 import Vue from 'vue';
 import AppMenu from '@/components/AppMenu.vue';
-import { filterTeams, excuseTeam } from '@/services/teams';
+import { filterTeams, excuseTeam, addUserToTeam } from '@/services/teams';
 import { mapGetters } from 'vuex';
 
 export default {
@@ -51,7 +53,8 @@ export default {
     data(){
       return {
         teams: '',
-        usersList: []
+        usersList: [],
+        userId: ''
       }
     },
     components: {
@@ -82,6 +85,23 @@ export default {
           Vue.$toast.open({
             type: 'success',
             message: 'Teams Updated!',
+            duration: 5000
+          })
+        } catch (error) {
+          Vue.$toast.open({
+            type: 'error',
+            message: error.response.data,
+            duration: 5000
+          })
+        }
+      },
+      async onAddUser(teamId, userId){
+        try {
+          await addUserToTeam(teamId, userId)
+          await this.getTeams()
+          Vue.$toast.open({
+            type: 'success',
+            message: 'Member added to team!',
             duration: 5000
           })
         } catch (error) {

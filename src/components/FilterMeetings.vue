@@ -45,12 +45,15 @@
             <hr>
             <p class="attendees"><span class="bolder">Attendees</span>: 
               <span v-for="attendee in meeting.attendees" :key="attendee.userId">{{attendee.email}}, </span></p>
-            <label for="members">
-              <select name="members" id="members" class="select-members">
-                <option value="">Select member</option>
-              </select>
-            </label>
-            <button type="button" id="add-member-btn" class="my-btn">Add</button>
+            <form @submit.prevent="addUser(meeting._id, userId)">
+              <label for="members">
+                <select name="members" id="members" class="select-members" v-model="userId" required>
+                  <option value="">Select member</option>
+                  <option v-for="(user, index) in usersList" :key="index" :value="user">{{ user }}</option>
+                </select>
+              </label>
+              <button type="submit" id="add-member-btn" class="my-btn">Add</button>
+            </form>
           </div>
         </div>
     </div>
@@ -59,7 +62,8 @@
 
 <script>
 import Vue from 'vue';
-import { filterMeetings, excuseMeet } from '@/services/meetings'
+import { filterMeetings, excuseMeet, addUserToMeeting } from '@/services/meetings';
+import { mapGetters } from 'vuex';
 
 export default {
   name: "FilterMeetings",
@@ -67,10 +71,24 @@ export default {
     return{
       period: 'all',
       search: '',
-      filteredMeetings: ''
+      filteredMeetings: '',
+      usersList: [],
+      userId: ''
     }
   },
+  mounted() {
+        this.usersList = this.allUsers;
+  },
+  created(){
+    window.addEventListener('beforeunload', this.updateUsersList())
+  },
+  computed: {
+    ...mapGetters(['allUsers']),
+  },
   methods: {
+    async updateUsersList(){
+      await this.$store.dispatch('getAllUsers')
+    },
     async onFilterMeetings(){
       try {
         this.filteredMeetings = await filterMeetings(this.period, this.search)
@@ -98,6 +116,23 @@ export default {
             duration: 5000
           })
       }
+    },
+    async addUser(meetId, userId){
+      try {
+        await addUserToMeeting(meetId, userId);
+        await this.onFilterMeetings()
+        Vue.$toast.open({
+            type: 'success',
+            message: 'user added to meeting',
+            duration: 5000
+          })     
+      } catch (error) {
+        Vue.$toast.open({
+            type: 'error',
+            message: error.response.data,
+            duration: 5000
+          })
+      }
     }
   }
 };
@@ -110,6 +145,10 @@ export default {
 
 #search-date{
   width:100%;
+}
+
+.meeting-results-section{
+  padding-bottom: 1em;
 }
 .result{
     border: 1px solid grey;
@@ -136,8 +175,15 @@ export default {
     background-color: #fff;
     border: 1px solid grey;
     border-radius: 4px;
-    padding: 0.5em;
+    padding: 0.25em;
     margin-bottom: 1em;
-    width: 200px;
+    width: 300px;
+    font-size: medium;
+    margin-right: 0.5em;
+}
+
+#add-member-btn{
+  margin-top: 0;
+  padding: 0.5em;
 }
 </style>

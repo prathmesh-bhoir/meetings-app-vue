@@ -13,3 +13,9 @@ export const excuseMeet = async (id) => {
 
     return response.data
 }
+
+export const addUserToMeeting = async (meetId, userId) => {
+    const response = await axios.patch(`${BASE_URL}/meetings/${meetId}?action=add_attendee&email=${userId}`)
+
+    return response
+}

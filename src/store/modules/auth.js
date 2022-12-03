@@ -50,16 +50,16 @@ const auth = {
             async getAllUsers({commit}){
                 
                 const usersList = []
-                const data = await getUsers();
-                data.forEach(user => {
-                    usersList.push(user.email)
-                })
+                const response = await getUsers();
 
+                response.data.forEach(user => {
+                    usersList.push(user.email);
+                })
                 localStorage.setItem(KEY_USERS, usersList);
 
                 commit('setAllUsers', usersList);
 
-                return data;
+                return response;
             }
         }
 }

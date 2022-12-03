@@ -3,9 +3,9 @@ import axios from "axios";
 
 
 const getUsers = async function(){
-    const data = await axios.get(`${BASE_URL}/users`)
+    const response = await axios.get(`${BASE_URL}/users`)
 
-    return data
+    return response
 }
 
 export default getUsers

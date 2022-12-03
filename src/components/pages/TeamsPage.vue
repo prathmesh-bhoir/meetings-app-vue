@@ -25,13 +25,13 @@
 
                 </div>
               </div>
-                <div class="team d-flex flex-column">
+                <div class="team d-flex flex-column" v-if="this.$route.path == '/teams/add'">
+                  <router-view></router-view>
+                </div>
+                <div class="team d-flex flex-column" v-else>
                     <div class="add-team-container d-flex justify-content-center align-items-center">
                         <router-link :to="{name: 'add-team' }"><font-awesome-icon icon="plus" /></router-link>
                     </div>
-                </div>
-                <div class="team d-flex flex-column">
-                  <router-view></router-view>
                 </div>
             </section>
         </section>
@@ -91,12 +91,15 @@ body{
     .my-teams{
         grid-template-columns: 1fr;
     }
+    .team{
+      width: 100%;
+    }
 }
 
 .team{
     border: 1px solid grey;
     border-radius: 4px;
-    padding: 1em 1.5em;
+    padding: 1em 1.5em 1.5em 1.5em;
     box-sizing: border-box;
 }
 
@@ -109,7 +112,7 @@ body{
   width: 200px;
 }
 .select-members{
-  width: 50%;
+  width: 200px;
   border-radius: 4px;
   font-size: medium;
   padding: 0.5em;

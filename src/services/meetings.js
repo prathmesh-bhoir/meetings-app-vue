@@ -19,3 +19,21 @@ export const addUserToMeeting = async (meetId, userId) => {
 
     return response
 }
+
+export const addMeeting = async (meetDetails) => {
+
+    const attendees = meetDetails.attendees.split(', ')
+
+    const details = {
+        name: meetDetails.name,
+        description: meetDetails.description,
+        date: meetDetails.date,
+        startTime: meetDetails.startTime,
+        endTime: meetDetails.endTime,
+        attendees
+    }
+
+    const response = await axios.post(`${BASE_URL}/meetings`, details)
+
+    return response
+}

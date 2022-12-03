@@ -164,7 +164,7 @@ export default {
                 });
                 Vue.$toast.open({
                   type: 'success',
-                  message: 'User created successfully! Try Loggin In',
+                  message: 'User created successfully! Login to continue.. ',
                   duration: 5000
               })
             } catch (error) {

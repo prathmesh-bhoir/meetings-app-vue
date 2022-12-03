@@ -17,7 +17,7 @@
       >
           <router-link :to="{name: 'calendar' }" class="main-menu-link" class-active="active">Calendar</router-link>
           <router-link :to="{name: 'filter-meetings'}" class="main-menu-link" :class="this.meetingsPath ? 'current' : '' " class-active="active">Meetings</router-link>
-          <router-link :to="{name: 'teams' }" class="main-menu-link" class-active="active">Teams</router-link>
+          <router-link :to="{name: 'teams' }" class="main-menu-link" :class="this.teamsPath ? 'current' : '' " class-active="active">Teams</router-link>
       </div>
       <div class="nav-content-right d-flex justify-content-end" :class="this.showMobileMenu ? 'open-menu' : 'closed-menu'">
         <div class="email-field">Hello, <span style="color:navy;">{{getEmail}}</span></div>
@@ -33,13 +33,14 @@
         data(){
           return {
             showMobileMenu: true,
-            meetingsPath: false
+            meetingsPath: false,
+            teamsPath: false
           }
         },
         created() {
           window.addEventListener('resize', this.checkScreen);
           this.checkScreen();
-          window.addEventListener('beforeunload', this.updateMeetingsPath())
+          window.addEventListener('beforeunload', this.updatePath())
         },
         computed: {
           getEmail() {
@@ -51,18 +52,24 @@
         },
         watch: {
           checkPath() {
-              this.updateMeetingsPath()
+              this.updatePath()
           }
         },
         methods: {
           showMenu(){
             this.showMobileMenu = !this.showMobileMenu;
           },
-          updateMeetingsPath(){
+          updatePath(){
             if(this.$route.path == '/meetings/add'){
               this.meetingsPath = true
             }else{
               this.meetingsPath = false
+            }
+
+            if(this.$route.path == '/teams/add'){
+              this.teamsPath = true
+            }else{
+              this.teamsPath = false
             }
           },
           checkScreen(){

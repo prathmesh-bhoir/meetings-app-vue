@@ -47,11 +47,7 @@
                     v-model="form.startMin"
                     >
                         <option value="0" selected>0</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
+                        <option v-for="n in 59" :key="n">{{n}}</option>
                     </select>
                     <div v-if="$v.form.startHr.$error">
                         <div class="text-danger" v-if="!$v.form.startHr.required">
@@ -75,6 +71,7 @@
                     v-model="form.endMin"
                     >
                         <option value="0" selected>0</option>
+                        <option v-for="n in 59" :key="n">{{n}}</option>
                         
                     </select>
                     <div v-if="$v.form.endHr.$error">

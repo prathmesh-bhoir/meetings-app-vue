@@ -28,10 +28,7 @@
         <button type="submit" @click.prevent="onFilterMeetings()" class="my-btn">Search</button>
       </form>
     </div>
-    <div class="text-center mt-3" v-if="this.loading">
-        <b-spinner label="Spinning"></b-spinner>
-    </div>
-    <div class="meeting-results-section" v-else>
+    <div class="meeting-results-section">
         <h1>Meetings matching search criteria</h1>
         <hr>
         <div class="meeting-results" v-for="meeting in filteredMeetings" :key="meeting._id">
@@ -72,7 +69,6 @@ export default {
   name: "FilterMeetings",
   data(){
     return{
-      loading: false,
       period: 'all',
       search: '',
       filteredMeetings: '',
@@ -94,23 +90,21 @@ export default {
       await this.$store.dispatch('getAllUsers')
     },
     async onFilterMeetings(){
-      this.loading = true;
       try {
         this.filteredMeetings = await filterMeetings(this.period, this.search)
-        this.loading = false;
-        if(this.filteredMeetings.length == 0){
-          Vue.$toast.open({
-            type: 'error',
-            message: 'No meetings found!',
-            duration: 5000
-          })
-        }else{
-          Vue.$toast.open({
-            type: 'success',
-            message: `${this.filteredMeetings.length} meetings found!`,
-            duration: 5000
-          })
-        }
+        // if(this.filteredMeetings.length == 0){
+        //   Vue.$toast.open({
+        //     type: 'error',
+        //     message: 'No meetings found!',
+        //     duration: 5000
+        //   })
+        // }else{
+        //   Vue.$toast.open({
+        //     type: 'success',
+        //     message: `${this.filteredMeetings.length} meetings found!`,
+        //     duration: 5000
+        //   })
+        // }
       } catch (error) {
         Vue.$toast.open({
             type: 'error',

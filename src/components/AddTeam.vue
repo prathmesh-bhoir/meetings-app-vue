@@ -14,14 +14,20 @@
         
       </div>
       <hr>
-      <p class="selected-members"><span class="bolder">Members</span>: <span id="selected-members">john@example.com,
-          jane@example.com, pratham@example.com</span></p>
-      <form>
+      <p class="selected-members">
+        <span class="bolder">Members</span>: <span id="selected-members">
+          <span class="text-break" v-for="(member, idx) in form.teamMembers" :key="idx">{{member}}, </span>
+        </span>
+      </p>
+      <form @submit.prevent="onAddMember(selectedMember)">
         <label for="select-members"></label>
-        <select name="select-members" class="select-members">
+        <select name="select-members" class="select-members"
+        v-model="selectedMember"
+        >
           <option value="">Select member</option>
+          <option v-for="(member, index) in membersList" :key="index">{{member}}</option>
         </select>
-        <button type="button" class="my-btn add-member-btn">Add</button>
+        <button class="my-btn add-member-btn">Add</button>
       </form>
       <button type="submit" class="my-btn add-team-btn-main">Add team</button>
     </form>
@@ -29,8 +35,42 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+import { filterTeams } from '@/services/teams';
+
 export default {
-    name: 'AddTeam'
+    name: 'AddTeam',
+    data(){
+      return{
+        selectedMember: '',
+        membersList: [],
+        form: {
+          teamMembers: []
+        }
+      }
+    },
+    created() {
+      window.addEventListener('beforeunload', this.updateUsersList())
+      this.getTeams()
+    },
+    computed: {
+      ...mapGetters(['allUsers'])
+    },
+    mounted(){
+      this.membersList = this.allUsers
+    },
+    methods: {
+      async getTeams(){
+        this.teams = await filterTeams();
+      },
+      async updateUsersList(){
+        await this.$store.dispatch('getAllUsers')
+      },
+      onAddMember(member){
+        this.form.teamMembers.push(member)
+      }
+    }
+
 }
 </script>
 

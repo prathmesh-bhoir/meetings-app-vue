@@ -8,7 +8,7 @@
             <p class="grey">View and edit teams you are part of</p>
             <section class="my-teams" id="teams-results">
               <div v-for="team in teams" :key="team._id" class="d-flex">
-                <div class="team d-flex flex-column">
+                <div class="team text-break d-flex flex-column">
                       <h3 class="team-heading">{{team.name}}</h3>
                       <p class="bolder">{{team.shortName}}</p>
                       <p class="desc">{{team.description}}</p>
@@ -76,7 +76,6 @@ export default {
       },
       async getTeams(){
         this.teams = await filterTeams();
-        console.log(this.teams)
       },
       async onExcuse(teamId){
         try {

@@ -32,7 +32,7 @@
         <h1>Meetings matching search criteria</h1>
         <hr>
         <div class="meeting-results" v-for="meeting in filteredMeetings" :key="meeting._id">
-          <div class="result">
+          <div class="result text-break">
             <h2 class="meet-name">{{meeting.name}}</h2>
             <p>
               <span class="bolder" style="font-size: 1.25em;">{{meeting.date.slice(0,10)}} </span>

@@ -19,3 +19,9 @@ export const addUserToTeam = async (teamId, userId) => {
 
     return response.data
 }
+
+export const addTeam = async (teamDetails) => {
+    const response = await axios.post(`${BASE_URL}/teams`, teamDetails)
+
+    return response.data
+}

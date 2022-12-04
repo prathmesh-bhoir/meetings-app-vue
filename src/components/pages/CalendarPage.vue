@@ -11,7 +11,6 @@
                 </div>
                 <div class="right-side">
                     <input type="date" name="date" id="date-picker">
-                    <!-- <i class="fa-regular fa-calendar" style="color:black;"></i> -->
                 </div>
             </section>
             <section class="calendar">

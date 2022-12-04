@@ -141,12 +141,10 @@ body{
     .my-teams{
         grid-template-columns: 1fr;
     }
-    .team{
-      width: 100%;
-    }
 }
 
 .team{
+    width: 100%;
     border: 1px solid grey;
     border-radius: 4px;
     padding: 1em 1.5em 1.5em 1.5em;

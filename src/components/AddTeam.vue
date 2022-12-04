@@ -63,7 +63,7 @@
 <script>
 import Vue from 'vue';
 import { mapGetters } from 'vuex';
-import { filterTeams, addTeam } from '@/services/teams';
+import { addTeam } from '@/services/teams';
 import { required } from 'vuelidate/lib/validators';
 
 export default {
@@ -94,8 +94,7 @@ export default {
       }
     },
     created() {
-      window.addEventListener('beforeunload', this.updateUsersList())
-      this.getTeams()
+      window.addEventListener('beforeunload', this.updateUsersList());
     },
     computed: {
       ...mapGetters(['allUsers'])
@@ -104,9 +103,6 @@ export default {
       this.membersList = this.allUsers
     },
     methods: {
-      async getTeams(){
-        this.teams = await filterTeams();
-      },
       async updateUsersList(){
         await this.$store.dispatch('getAllUsers')
       },
@@ -125,7 +121,9 @@ export default {
 
         try {
           await addTeam(this.form)
-          await this.getTeams()
+          this.$router.replace({
+            name: 'teams'
+          });
           Vue.$toast.open({
             type: 'success',
             message: 'Team added successfully!',

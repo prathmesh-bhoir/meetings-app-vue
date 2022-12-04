@@ -67,6 +67,9 @@ export default {
       window.addEventListener('beforeunload', this.updateUsersList())
       this.getTeams()
     },
+    updated(){
+      this.getTeams()
+    },
     computed: {
       ...mapGetters(['allUsers']),
     },

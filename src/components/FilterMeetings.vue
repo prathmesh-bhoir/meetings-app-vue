@@ -37,7 +37,7 @@
             <p>
               <span class="bolder" style="font-size: 1.25em;">{{meeting.date | dateFilter()}} </span>
               <span>
-                {{meeting.startTime.hours}}:{{meeting.startTime.minutes}} - {{meeting.endTime.hours}}:{{meeting.endTime.minutes}}
+                {{meeting.startTime.hours | addZero()}}:{{meeting.startTime.minutes | addZero()}} - {{meeting.endTime.hours | addZero()}}:{{meeting.endTime.minutes | addZero()}}
               </span>
             </p>
             <p>{{meeting.desc}}</p>

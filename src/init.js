@@ -11,6 +11,7 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { fas, faBars } from '@fortawesome/free-solid-svg-icons'
 
 import dateFilter from '@/filters/formatDate';
+import addZero from './filters/addZero';
 
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
@@ -36,4 +37,5 @@ library.add(fas, faBars)
 // https://bootstrap-vue.org/docs/icons#icons
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
+Vue.filter('addZero', addZero)
 Vue.filter( 'dateFilter', dateFilter );

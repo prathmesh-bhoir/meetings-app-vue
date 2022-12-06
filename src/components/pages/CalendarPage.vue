@@ -53,7 +53,6 @@ export default {
         formatDate(){
             const date = new Date(this.selectedDate)
             this.searchDate = date
-            // .toLocaleString('en-us', { day:"numeric", month:"long", year:"numeric"})
             this.selectedDate = date.toJSON().slice(0, 10).replace(/-/g, '-')
             this.todayDay = date.toLocaleDateString('en-us', {weekday: "long"})
         }

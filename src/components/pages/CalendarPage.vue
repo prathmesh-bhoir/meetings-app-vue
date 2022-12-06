@@ -10,7 +10,7 @@
                     <p class="day" id="today-day">{{todayDay}}</p>
                 </div>
                 <div class="right-side">
-                    <input @change.prevent="formatDate()" type="date" name="date" id="date-picker" v-model="selectedDate">
+                    <input @change="formatDate()" type="date" name="date" id="date-picker" v-model="selectedDate">
                 </div>
             </section>
             <section class="calendar">
@@ -26,7 +26,9 @@
 </template>
 
 <script>
+// import Vue from 'vue';
 import AppMenu from '@/components/AppMenu.vue';
+import {getMeetings} from '@/services/calendar';
 
 export default {
     name: 'CalendarPage',
@@ -37,25 +39,31 @@ export default {
         return{
             selectedDate: '',
             searchDate: '',
-            todayDay: ''
+            todayDay: '',
+            meetings: ''
         }
     },
     created(){
         this.getTodayDate();
+        this.formatDate();
     },
     methods: {
         getTodayDate(){
             const date = new Date()
-            this.selectedDate = date.toJSON().slice(0, 10).replace(/-/g, '-')
-            this.searchDate = date
-            this.todayDay = date.toLocaleDateString('en-us', {weekday: "long"})
+            this.selectedDate = date
         },
         formatDate(){
             const date = new Date(this.selectedDate)
             this.searchDate = date
-            this.selectedDate = date.toJSON().slice(0, 10).replace(/-/g, '-')
+            this.selectedDate = date.toJSON().slice(0, 10)
             this.todayDay = date.toLocaleDateString('en-us', {weekday: "long"})
-        }
+
+            const getMeets = async() =>{
+                this.meetings = await getMeetings(this.selectedDate);
+                console.log(this.meetings)
+            }
+            getMeets();
+        },
     }
 }
 </script>

@@ -32,9 +32,6 @@ Vue.use(require("moment"));
 library.add(fas, faBars)
 
 /* use Vue.component( componentName, ComponentObject ) to globally register the component - once you globally register a component you don't need to locally register in each and every component */
-/* add font awesome icon component */
-/* Instead of font awesome icons, we can also use icons that Bootstrap Vue provides */
-// https://bootstrap-vue.org/docs/icons#icons
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 Vue.filter('addZero', addZero)

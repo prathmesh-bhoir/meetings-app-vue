@@ -18,7 +18,19 @@
                     <div class="calendar-hour" v-for="n in 24" :key="(n-1)">{{(n-1)}}</div>
                 </div>
                 <div class="calendar-content">
-                    <div class="calendar-content-box" v-for="n in 24" :key="(n-1)"></div>
+                    <div class="calendar-content-box" v-for="n in 24" :key="(n-1)">
+                        <div v-for="meeting in meetings" :key="meeting._id">
+                            <div v-if="(meeting.startTime.hours == n-1)">
+                                <div class="my-container meet-info">
+                                <h4 class="meet-name">{{meeting.name}}</h4>
+                                    <hr>
+                                    <p class="attendees-container"><span class="bolder">Attendees: </span>
+                                    <span v-for="attendee in meeting.attendees" :key="attendee.userId">{{attendee.email}}, </span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </section>
         </div>  
@@ -129,7 +141,7 @@ export default {
 
 .meet-info{
     height: auto;
-    padding: 0.5em;
+    padding: 0.5em 1em 0 1em;
     background-color: lightgrey;
 }
 .meet-name,
@@ -141,5 +153,6 @@ export default {
 }
 .meet-info hr{
     background-color: grey;
+    margin: 0.25em;
 }
 </style>

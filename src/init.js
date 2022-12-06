@@ -10,12 +10,8 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 // import any icons that you use in the app
 import { fas, faBars } from '@fortawesome/free-solid-svg-icons'
 
-// import formatDate from '@/filters/formatDate';
+import dateFilter from '@/filters/formatDate';
 
-// import AppVotingWidget from '@/components/utils/AppVotingWidget.vue';
-
-// Import Bootstrap and BootstrapVue CSS files (order is important)
-// we can import even CSS files!
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 
@@ -24,12 +20,12 @@ import 'vue-toast-notification/dist/theme-default.css'
 
 // Make BootstrapVue available throughout your project
 Vue.use(BootstrapVue)
-// Optionally install the BootstrapVue icon components plugin
 Vue.use(IconsPlugin)
 Vue.use(Vuex)
 Vue.use(Router)
 Vue.use(Vuelidate);
 Vue.use(VueToast);
+Vue.use(require("moment"));
 
 /* add icons to the library */
 library.add(fas, faBars)
@@ -39,5 +35,5 @@ library.add(fas, faBars)
 /* Instead of font awesome icons, we can also use icons that Bootstrap Vue provides */
 // https://bootstrap-vue.org/docs/icons#icons
 Vue.component('font-awesome-icon', FontAwesomeIcon)
-// Vue.component('app-voting-widget', AppVotingWidget)
-// Vue.filter( 'date', formatDate );
+
+Vue.filter( 'dateFilter', dateFilter );

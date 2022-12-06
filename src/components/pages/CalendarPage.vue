@@ -6,11 +6,11 @@
             <hr>
             <section class="calendar-date">
                 <div class="left-side">
-                    <p class="date bolder" id="today-date">12 September 2020</p>
-                    <p class="day" id="today-day">Saturday</p>
+                    <p class="date bolder" id="today-date">{{searchDate | dateFilter()}}</p>
+                    <p class="day" id="today-day">{{todayDay}}</p>
                 </div>
                 <div class="right-side">
-                    <input type="date" name="date" id="date-picker">
+                    <input @change.prevent="formatDate()" type="date" name="date" id="date-picker" v-model="selectedDate">
                 </div>
             </section>
             <section class="calendar">
@@ -33,6 +33,31 @@ export default {
     components: {
         AppMenu,
     },
+    data(){
+        return{
+            selectedDate: '',
+            searchDate: '',
+            todayDay: ''
+        }
+    },
+    created(){
+        this.getTodayDate();
+    },
+    methods: {
+        getTodayDate(){
+            const date = new Date()
+            this.selectedDate = date.toJSON().slice(0, 10).replace(/-/g, '-')
+            this.searchDate = date
+            this.todayDay = date.toLocaleDateString('en-us', {weekday: "long"})
+        },
+        formatDate(){
+            const date = new Date(this.selectedDate)
+            this.searchDate = date
+            // .toLocaleString('en-us', { day:"numeric", month:"long", year:"numeric"})
+            this.selectedDate = date.toJSON().slice(0, 10).replace(/-/g, '-')
+            this.todayDay = date.toLocaleDateString('en-us', {weekday: "long"})
+        }
+    }
 }
 </script>
 

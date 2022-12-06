@@ -35,7 +35,7 @@
           <div class="result text-break">
             <h2 class="meet-name">{{meeting.name}}</h2>
             <p>
-              <span class="bolder" style="font-size: 1.25em;">{{meeting.date.slice(0,10)}} </span>
+              <span class="bolder" style="font-size: 1.25em;">{{meeting.date | dateFilter()}} </span>
               <span>
                 {{meeting.startTime.hours}}:{{meeting.startTime.minutes}} - {{meeting.endTime.hours}}:{{meeting.endTime.minutes}}
               </span>
@@ -48,11 +48,11 @@
             <form @submit.prevent="addUser(meeting._id, userId)">
               <label for="members">
                 <select name="members" id="members" class="select-members" v-model="userId" required>
-                  <option value="" selected>Select member</option>
+                  <option value="">Select member</option>
                   <option v-for="(user, index) in usersList" :key="index" :value="user">{{ user }}</option>
                 </select>
               </label>
-              <button type="submit" id="add-member-btn" class="my-btn">Add</button>
+              <button id="add-member-btn" class="my-btn">Add</button>
             </form>
           </div>
         </div>
@@ -161,12 +161,17 @@ export default {
 }
 
 .meeting-results-section{
-  padding-bottom: 1em;
+  padding-bottom: 2em;
 }
 .result{
     border: 1px solid grey;
+    border-radius: 4px;
     padding: 0 1em;
-    margin-top: 1em;
+    margin-top: 2em;
+}
+.result:hover,
+.result:active{
+  box-shadow: rgba(3, 102, 214, 0.3) 0px 0px 0px 3px;
 }
 
 .meet-name{

@@ -20,7 +20,7 @@
                         <select name="members" id="members" class="select-members" 
                         v-model="userId"
                         required>
-                          <option value="">Select member</option>
+                          <option value="" selected>Select member</option>
                           <option v-for="(user, index) in usersList" :key="index">{{user}}</option>
                         </select>
                         <button type="submit" class="my-btn add-member-btn">Add</button>
@@ -152,6 +152,10 @@ body{
     border-radius: 4px;
     padding: 1em 1.5em 1.5em 1.5em;
     box-sizing: border-box;
+}
+.team:hover,
+.team:active{
+  box-shadow: rgba(3, 102, 214, 0.3) 0px 0px 0px 3px;
 }
 
 .team p{

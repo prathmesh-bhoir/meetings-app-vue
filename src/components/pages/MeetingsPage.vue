@@ -7,7 +7,7 @@
             <section>
                 <div class="d-flex options-container">
                     <div><router-link class="page-options" :to="{name: 'filter-meetings'}" class-active="active">Filter/Search meetings</router-link></div>
-                    <div><router-link :to="{name: 'add-meeting'}" class="page-options" class-active="active">Add a meeting</router-link></div>
+                    <div><router-link class="page-options" :to="{name: 'add-meeting'}" class-active="active">Add a meeting</router-link></div>
                 </div>
                 <hr>
                 <router-view></router-view>

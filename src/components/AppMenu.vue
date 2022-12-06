@@ -100,12 +100,16 @@
     text-decoration: none;
 }
 .main-menu-link:hover,
-.main-menu-link:active,
+.main-menu-link:active{
+  cursor: pointer;
+  color: black !important;
+  background-color: rgb(204, 204, 204);
+}
 .router-link-exact-active,
 .current{
     cursor: pointer;
     color: black !important;
-    background-color: lightgrey;
+    background-color: rgb(165, 165, 165) !important;
 }
 .logout-btn:hover{
     cursor: pointer;

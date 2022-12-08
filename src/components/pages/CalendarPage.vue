@@ -22,7 +22,9 @@
                         <div v-for="meeting in meetings" :key="meeting._id">
                             <div v-if="(meeting.startTime.hours == n-1)">
                                 <div class="my-container meet-info" 
-                                :style="{height:(((parseInt(meeting.endTime.hours) + (parseInt(meeting.endTime.minutes)/100)) - (parseInt(meeting.startTime.hours) + (parseInt(meeting.startTime.minutes)/100))) * 80) + `px`}"
+                                :style="{
+                                    height:(((parseInt(meeting.endTime.hours) + (parseInt(meeting.endTime.minutes)/100)) - (parseInt(meeting.startTime.hours) + (parseInt(meeting.startTime.minutes)/100))) * 80) + `px`,
+                                    marginTop: (parseInt(meeting.startTime.minutes)*1.166) +`px`}"
                                 >
                                 <h4 class="meet-name">{{meeting.name}}</h4>
                                     <hr>
@@ -88,8 +90,9 @@ export default {
 }
 </script>
 
-<style scoped>
 
+
+<style scoped>
 .calendar-date{
     display: flex;
     justify-content: space-between;
@@ -149,6 +152,8 @@ export default {
 
 .meet-info{
     /* height: 80px; */
+    width: 78.65%;
+    position: absolute;
     padding: 0.25em 1em 0 1em;
     background-color: lightgrey;
 }

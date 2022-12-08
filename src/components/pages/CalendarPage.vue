@@ -141,7 +141,7 @@ export default {
 
 .meet-info{
     height: auto;
-    padding: 0.5em 1em 0 1em;
+    padding: 0.25em 1em 0 1em;
     background-color: lightgrey;
 }
 .meet-name,

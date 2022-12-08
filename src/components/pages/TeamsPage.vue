@@ -7,7 +7,7 @@
         <section class="teams-section">
             <p class="grey">View and edit teams you are part of</p>
             <section class="my-teams" id="teams-results">
-              <div v-for="team in teams" :key="team._id" class="d-flex">
+              <div v-for="(team,index) in teams" :key="team._id" class="d-flex">
                 <div class="team text-break d-flex flex-column">
                       <h3 class="team-heading">{{team.name}}</h3>
                       <p class="bolder">{{team.shortName}}</p>
@@ -15,12 +15,12 @@
                     <button class="excuse-btn my-btn-red" @click.prevent="onExcuse(team._id)">Excuse yourself</button>
                     <hr>
                     <p class="members"><span class="bolder">Members:</span> <span class="team-members" v-for="member in team.members" :key="member.userId">{{member.email}}, </span></p>
-                      <form class="members-form d-flex align-items-end h-100" @submit.prevent="onAddUser(team._id, userId)">
-                        <label for="members"></label>
-                        <select name="members" id="members" class="select-members" 
-                        v-model="userId"
+                      <form class="members-form d-flex align-items-end h-100" @submit.prevent="onAddUser(team._id, userId[index])">
+                        <label :for="userId[index]"></label>
+                        <select :id="userId[index]" class="select-members" 
+                        v-model="userId[index]"
                         required>
-                          <option value="" selected>Select member</option>
+                          <option :value=null selected>Select member</option>
                           <option v-for="(user, index) in usersList" :key="index">{{user}}</option>
                         </select>
                         <button type="submit" class="my-btn add-member-btn">Add</button>
@@ -54,7 +54,7 @@ export default {
       return {
         teams: '',
         usersList: [],
-        userId: ''
+        userId: []
       }
     },
     components: {

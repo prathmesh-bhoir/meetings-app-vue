@@ -31,7 +31,7 @@
     <div class="meeting-results-section">
         <h1>Meetings matching search criteria</h1>
         <hr>
-        <div class="meeting-results" v-for="meeting in filteredMeetings" :key="meeting._id">
+        <div class="meeting-results" v-for="(meeting, index) in filteredMeetings" :key="meeting._id">
           <div class="result text-break">
             <h2 class="meet-name">{{meeting.name}}</h2>
             <p>
@@ -45,10 +45,10 @@
             <hr>
             <p class="attendees"><span class="bolder">Attendees</span>: 
               <span v-for="attendee in meeting.attendees" :key="attendee.userId">{{attendee.email}}, </span></p>
-            <form @submit.prevent="addUser(meeting._id, userId)">
-              <label for="members">
-                <select name="members" id="members" class="select-members" v-model="userId" required>
-                  <option value="">Select member</option>
+            <form @submit.prevent="addUser(meeting._id, userId[index])">
+              <label :for="userId[index]">
+                <select :id="userId[index]" class="select-members" v-model="userId[index]" required>
+                  <option value="" selected>Select member</option>
                   <option v-for="(user, index) in usersList" :key="index" :value="user">{{ user }}</option>
                 </select>
               </label>
@@ -73,7 +73,7 @@ export default {
       search: '',
       filteredMeetings: '',
       usersList: [],
-      userId: ''
+      userId: []
     }
   },
   mounted() {

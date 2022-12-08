@@ -21,7 +21,9 @@
                     <div class="calendar-content-box" v-for="n in 24" :key="(n-1)">
                         <div v-for="meeting in meetings" :key="meeting._id">
                             <div v-if="(meeting.startTime.hours == n-1)">
-                                <div class="my-container meet-info">
+                                <div class="my-container meet-info" 
+                                :style="{height:(((parseInt(meeting.endTime.hours) + (parseInt(meeting.endTime.minutes)/100)) - (parseInt(meeting.startTime.hours) + (parseInt(meeting.startTime.minutes)/100))) * 80) + `px`}"
+                                >
                                 <h4 class="meet-name">{{meeting.name}}</h4>
                                     <hr>
                                     <p class="attendees-container"><span class="bolder">Attendees: </span>
@@ -72,10 +74,16 @@ export default {
 
             const getMeets = async() =>{
                 this.meetings = await getMeetings(this.selectedDate);
-                console.log(this.meetings)
             }
             getMeets();
         },
+        // setHeight(start, end){
+        //     console.log(start)
+        //     console.log(end)
+        //     const height = ((parseInt(end.hours) + (parseInt(end.minutes)/100)) - (parseInt(start.hours) + (parseInt(start.minutes)/100))) * 80
+        //     console.log(height)
+        //     return height
+        // }
     }
 }
 </script>
@@ -124,7 +132,7 @@ export default {
 }
 .calendar-hour,
 .calendar-content-box{
-    height: 75px;
+    height: 70px;
     margin-bottom: 10px;
 }
 .calendar-hour{
@@ -140,7 +148,7 @@ export default {
 }
 
 .meet-info{
-    height: auto;
+    /* height: 80px; */
     padding: 0.25em 1em 0 1em;
     background-color: lightgrey;
 }
